@@ -1,0 +1,42 @@
+{
+  "name": "farrow-federation",
+  "version": "0.0.1",
+  "repository": "git@github.com:tqma113/farrow-federation.git",
+  "author": "Ma Tianqi <mtq1997@126.com>",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prebuild": "yarn clean",
+    "clean": "rm -rf ./dist",
+    "lint": "prettier . --write",
+    "test": "jest",
+    "test:dev": "ts-node ./src/__tests__/fixtures/server.ts"
+  },
+  "dependencies": {
+    "farrow-api": "^1.10.9",
+    "farrow-api-server": "^1.10.9",
+    "farrow-http": "^1.10.9",
+    "farrow-pipeline": "^1.10.6",
+    "farrow-schema": "^1.10.8",
+    "node-fetch": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/lodash.get": "^4.4.6",
+    "@types/node": "^16.7.10",
+    "@types/supertest": "^2.0.11",
+    "cross-env": "^7.0.3",
+    "farrow-cors": "^1.10.9",
+    "jest": "^27.1.0",
+    "prettier": "^2.3.2",
+    "supertest": "^6.1.6",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
