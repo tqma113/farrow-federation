@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`farrow-federation base usage 1`] = `
+exports[`farrow-federation Introspection 1`] = `
 Object {
   "output": Object {
     "entries": Object {
