@@ -57,12 +57,14 @@ export type FederationOptions = {
   polling?: boolean
   pollingInterval?: number
   errorStack?: boolean
+  strict?: boolean
 }
 
 const defaultOptions = {
   fetch: nodeFetch as any,
-  polling: true,
+  polling: false,
   pollingInterval: 3000,
+  strict: true,
 }
 
 const UNKNOWN_REQUEST_MESSAGE = 'Unknown structure of request'
@@ -82,7 +84,7 @@ export const createFederationServices = async (
   const router = Router()
 
   let info = await getFederationInfo(services, options)
-  const poll = async () => {
+  const polling = async () => {
     info = await getFederationInfo(services, options)
   }
 
@@ -149,6 +151,10 @@ export const createFederationServices = async (
     // single calling
     return Response.json(await handleCalling(request.body, init))
   })
+
+  if (options.polling) {
+    setInterval(polling, options.pollingInterval)
+  }
 
   return router
 }

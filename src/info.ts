@@ -14,7 +14,7 @@ import type {
 
 export const getFederationInfo = async (
   services: ApiServices,
-  options: FederationOptions,
+  options: Required<FederationOptions>,
 ): Promise<FederationInfo> => {
   const schema: FormatResult = {
     protocol: 'Farrow-API',
@@ -85,9 +85,12 @@ export const getFederationInfo = async (
     const max = concatTypes(nextSchema.types)
 
     if (schema.entries.entries[apiService.namespace]) {
-      console.error(
-        `Can't merge the service at ${apiService.url} because the namespace: ${apiService.namespace} has been used`,
-      )
+      const message = `[Federation] Can't merge the service at ${apiService.url} because the namespace: ${apiService.namespace} has been used`
+      if (options.strict) {
+        throw new Error(message)
+      } else {
+        console.error(message)
+      }
     } else {
       const entries = updateEntries(nextSchema.entries, apiService, [])
       schema.entries.entries[apiService.namespace] = entries
@@ -102,9 +105,12 @@ export const getFederationInfo = async (
     if (result.isOk) {
       concat(result.value, service)
     } else {
-      console.error(
-        `[Federation]: Can't connect to the service at ${service.url} because ${result.value}`,
-      )
+      const message = `[Federation]: Can't connect to the service at ${service.url} because ${result.value}`
+      if (options.strict) {
+        throw new Error(message)
+      } else {
+        console.error(message)
+      }
     }
   }
 
